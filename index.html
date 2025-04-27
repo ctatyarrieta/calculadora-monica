@@ -4,25 +4,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Mónica</title>
+  <title>Calculadora Sweet Glam</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #333;
+      font-family: 'Georgia', serif;
+      font-size: 36px;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+      font-family: 'Georgia', serif;
+    }
+    input[type="number"] {
+      padding: 10px;
+      margin: 10px 0;
+      width: 250px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: 'Georgia', serif;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-family: 'Georgia', serif;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #222;
+      font-family: 'Georgia', serif;
+    }
+    p {
+      font-size: 18px;
+      color: #555;
+      margin: 8px 0;
+      font-family: 'Georgia', serif;
+    }
+  </style>
 </head>
 <body>
-  <h1>Calculadora Mónica</h1>
+  <h1>Calculadora Sweet Glam</h1>
 
-  <label for="valor">Ingresa el valor original (A2):</label>
-  <input type="number" id="valor" placeholder="Valor de A2">
-  <br><br>
+  <label for="valor">Valor:</label>
+  <input type="number" id="valor" placeholder="Valor">
 
   <label for="dolar">Ingresa el valor del dólar:</label>
   <input type="number" id="dolar" placeholder="4200" value="4200">
-  <br><br>
 
   <button onclick="calcular()">Calcular</button>
 
   <h2>Resultados:</h2>
-  <p id="valorA3">Valor A3 (con impuesto): -</p>
-  <p id="resultadoFinal">Precio final base: -</p>
-  <p id="resultadoMultiplicado">Precio final multiplicado: -</p>
+  <p id="resultadoMultiplicado">Precio de venta: -</p>
 
   <script>
     function calcular() {
@@ -30,9 +79,7 @@
       const dolar = parseFloat(document.getElementById('dolar').value);
 
       if (isNaN(A2) || isNaN(dolar)) {
-        document.getElementById('valorA3').innerText = "Por favor, ingresa números válidos.";
-        document.getElementById('resultadoFinal').innerText = "";
-        document.getElementById('resultadoMultiplicado').innerText = "";
+        document.getElementById('resultadoMultiplicado').innerText = "Por favor, ingresa números válidos.";
         return;
       }
 
@@ -43,7 +90,6 @@
       const porcentajeExtra = 1.25;
 
       const A3 = A2 * (1 + impuesto);
-      document.getElementById('valorA3').innerText = `Valor A3 (con impuesto): ${A3.toFixed(2)}`;
 
       let resultado;
       if (A3 <= 200) {
@@ -56,10 +102,10 @@
         resultado = A3 * porcentajeExtra;
       }
 
-      document.getElementById('resultadoFinal').innerText = `Precio final base: ${resultado.toFixed(2)}`;
+      let resultadoMultiplicado = resultado * dolar;
+      resultadoMultiplicado = Math.ceil(resultadoMultiplicado / 10000) * 10000;
 
-      const resultadoMultiplicado = resultado * dolar;
-      document.getElementById('resultadoMultiplicado').innerText = `Precio final multiplicado: ${resultadoMultiplicado.toFixed(2)}`;
+      document.getElementById('resultadoMultiplicado').innerText = `Precio de venta: ${resultadoMultiplicado}`;
     }
   </script>
 </body>
