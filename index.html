@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Mónica</title>
+</head>
+<body>
+  <h1>Calculadora Mónica</h1>
+
+  <label for="valor">Ingresa el valor original (A2):</label>
+  <input type="number" id="valor" placeholder="Valor de A2">
+  <br><br>
+
+  <label for="dolar">Ingresa el valor del dólar:</label>
+  <input type="number" id="dolar" placeholder="4200" value="4200">
+  <br><br>
+
+  <button onclick="calcular()">Calcular</button>
+
+  <h2>Resultados:</h2>
+  <p id="valorA3">Valor A3 (con impuesto): -</p>
+  <p id="resultadoFinal">Precio final base: -</p>
+  <p id="resultadoMultiplicado">Precio final multiplicado: -</p>
+
+  <script>
+    function calcular() {
+      const A2 = parseFloat(document.getElementById('valor').value);
+      const dolar = parseFloat(document.getElementById('dolar').value);
+
+      if (isNaN(A2) || isNaN(dolar)) {
+        document.getElementById('valorA3').innerText = "Por favor, ingresa números válidos.";
+        document.getElementById('resultadoFinal').innerText = "";
+        document.getElementById('resultadoMultiplicado').innerText = "";
+        return;
+      }
+
+      const impuesto = 0.07; // 7%
+      const F2 = 42;
+      const G2 = 59;
+      const H2 = 95;
+      const porcentajeExtra = 1.25;
+
+      const A3 = A2 * (1 + impuesto);
+      document.getElementById('valorA3').innerText = `Valor A3 (con impuesto): ${A3.toFixed(2)}`;
+
+      let resultado;
+      if (A3 <= 200) {
+        resultado = A3 + F2;
+      } else if (A3 > 200 && A3 <= 300) {
+        resultado = A3 + G2;
+      } else if (A3 > 300 && A3 <= 500) {
+        resultado = A3 + H2;
+      } else {
+        resultado = A3 * porcentajeExtra;
+      }
+
+      document.getElementById('resultadoFinal').innerText = `Precio final base: ${resultado.toFixed(2)}`;
+
+      const resultadoMultiplicado = resultado * dolar;
+      document.getElementById('resultadoMultiplicado').innerText = `Precio final multiplicado: ${resultadoMultiplicado.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
